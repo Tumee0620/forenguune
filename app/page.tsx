@@ -6,6 +6,7 @@ import { GiftReveal } from "@/components/gift-reveal";
 import { RevealButton } from "@/components/reveal-button";
 
 import { Gift, Sparkles, Heart } from "lucide-react";
+import { LiveChat } from "@/components/ui/live-chat";
 
 export default function MonitaSurprise() {
   const [isRevealed, setIsRevealed] = useState(false);
@@ -30,21 +31,23 @@ export default function MonitaSurprise() {
               <div className="flex items-center justify-center gap-3 text-accent/60">
                 <Heart className="w-4 h-4" fill="currentColor" />
                 <p className="tracking-[0.4em] uppercase text-sm font-light">
-                  for Shiro
+                  for Enguunlen
                 </p>
                 <Heart className="w-4 h-4" fill="currentColor" />
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-balance leading-tight">
                 Сайн уу
-                <span className="block text-primary mt-2">Shiro</span>
+                <span className="block text-primary mt-2">Энгүүнээ </span>
               </h1>
             </div>
 
             <div className="bg-card/50 backdrop-blur-sm rounded-3xl p-8 border border-border/30">
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                Энэхүү бэлгийг нээх өдрийн мэнд хүргэе!
+                Энэ мэндчилгээг нээх өдрийн мэнд хүргэе!
                 <br />
-                <span className="text-foreground font-medium"></span>
+                <span className="text-foreground font-medium">
+                  Happy Holidays!
+                </span>
               </p>
             </div>
 
@@ -75,14 +78,15 @@ export default function MonitaSurprise() {
             <RevealButton onClick={handleReveal} isAnimating={isAnimating} />
 
             <p className="text-sm text-muted-foreground/50 tracking-widest uppercase pt-6 animate-shimmer">
-              Бэлэг нээхэд зориулсан тусгай өдөр:{" "}
-              <span className="font-12">2025.12.05</span>
+              мэндчилгээ хүрэх өдөр
             </p>
           </div>
         ) : (
           <GiftReveal />
         )}
       </div>
+
+      <LiveChat />
     </main>
   );
 }
