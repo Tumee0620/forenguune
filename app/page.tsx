@@ -4,7 +4,7 @@ import { useState } from "react";
 import { StarField } from "@/components/star-field";
 import { GiftReveal } from "@/components/gift-reveal";
 import { RevealButton } from "@/components/reveal-button";
-import { LiveChat } from "@/components/live-chat";
+
 import { Gift, Sparkles, Heart } from "lucide-react";
 
 export default function MonitaSurprise() {
@@ -30,23 +30,21 @@ export default function MonitaSurprise() {
               <div className="flex items-center justify-center gap-3 text-accent/60">
                 <Heart className="w-4 h-4" fill="currentColor" />
                 <p className="tracking-[0.4em] uppercase text-sm font-light">
-                  Энгүүлэнд зориулав
+                  for Shiro
                 </p>
                 <Heart className="w-4 h-4" fill="currentColor" />
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-balance leading-tight">
                 Сайн уу
-                <span className="block text-primary mt-2">Энгүүнээ</span>
+                <span className="block text-primary mt-2">Shiro</span>
               </h1>
             </div>
 
             <div className="bg-card/50 backdrop-blur-sm rounded-3xl p-8 border border-border/30">
               <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                Хэн нэгний бэлэг чамайг хүлээж байна
+                Энэхүү бэлгийг нээх өдрийн мэнд хүргэе!
                 <br />
-                <span className="text-foreground font-medium">
-                  түүнийг илчлэхийг хүсэж байна уу?
-                </span>
+                <span className="text-foreground font-medium"></span>
               </p>
             </div>
 
@@ -85,8 +83,6 @@ export default function MonitaSurprise() {
           <GiftReveal />
         )}
       </div>
-
-      <LiveChat />
     </main>
   );
 }
