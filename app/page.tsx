@@ -31,13 +31,13 @@ export default function MonitaSurprise() {
               <div className="flex items-center justify-center gap-3 text-accent/60">
                 <Heart className="w-4 h-4" fill="currentColor" />
                 <p className="tracking-[0.4em] uppercase text-sm font-light">
-                  for Enguunlen
+                  for Kyuko
                 </p>
                 <Heart className="w-4 h-4" fill="currentColor" />
               </div>
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight text-balance leading-tight">
                 Сайн уу
-                <span className="block text-primary mt-2">Энгүүнээ </span>
+                <span className="block text-primary mt-2">Kyuko </span>
               </h1>
             </div>
 

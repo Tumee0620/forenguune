@@ -25,7 +25,7 @@ export function GiftReveal() {
             ref={iframeRef}
             width="250"
             height="50"
-            src="https://www.youtube.com/embed/M7TXYPnKEyY?autoplay=1&loop=1&playlist=M7TXYPnKEyY"
+            src="https://www.youtube.com/embed/WDxVPg_AZ-k?rel=0&autoplay=1&loop=1&playlist=WDxVPg_AZ-k"
             title="Background Music"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -59,11 +59,11 @@ export function GiftReveal() {
       <div className="bg-card/60 backdrop-blur-md rounded-[2rem] p-10 border border-primary/30 shadow-2xl animate-pulse-glow">
         <div className="space-y-6">
           <p className="text-muted-foreground tracking-[0.4em] uppercase text-sm">
-            Чиний нууц Санта бол ...
+            Чиний нууц Санта бол ...helehguee
           </p>
 
           <h2 className="text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight text-primary py-4">
-            Энгүүн
+            Kyuko
             <br />
             <span className="text-accent text-4xl md:text-5xl">танаа</span>
           </h2>
