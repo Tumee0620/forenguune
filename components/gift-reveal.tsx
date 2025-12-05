@@ -25,7 +25,7 @@ export function GiftReveal() {
             ref={iframeRef}
             width="250"
             height="50"
-            src="https://www.youtube.com/embed/WDxVPg_AZ-k?rel=0&autoplay=1&loop=1&playlist=WDxVPg_AZ-k"
+            src="https://www.youtube.com/embed/8PTDv_szmL0?rel=0&autoplay=1&loop=1&playlist=8PTDv_szmL0"
             title="Background Music"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -63,7 +63,7 @@ export function GiftReveal() {
           </p>
 
           <h2 className="text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight text-primary py-4">
-            Kyuko
+            Nandia
             <br />
             <span className="text-accent text-4xl md:text-5xl">танаа</span>
           </h2>
