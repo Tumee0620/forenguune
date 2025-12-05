@@ -1,124 +1,153 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { Heart, Sparkles, PartyPopper, Music } from "lucide-react";
-import { Confetti } from "@/components/confetti";
+import { useState, useEffect, useRef } from "react";
+import { Heart, Sparkles } from "lucide-react";
+import { Song } from "./song";
+import { Button } from "./ui/button";
 
-export function GiftReveal() {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+const poem = [
+  "Нарны туяа шиг дулаахан инээмсэглэлтэй,",
+  "Намрын салхи шиг намуухан зан ааштай .",
+  "Харцаараа хүнийг аргадан тайтгаруулж,",
+  "Хүмүүний зүрхэнд гэрэл гэгээ түгээдэг нэгэн.",
+  "",
+  "Эелдэг байдлынх нь өнгө зөөлөн бороонд шингэж,",
+  "Энхрий инээднийх нь чимээ сэтгэлд ая тоглодог.",
+  "Гарых нь хөдөлгөөн хүртэл намуухан шүлэг мэт,",
+  "Гэгээ тээж алхах нь хүртэл уянгыг бүтээнэ.",
+  "",
+  "Арслан, бар мэт бардам ч дотроо зөөлөн ,",
+  "Аянга шиг хүчтэй ч салхи шиг уян.",
+  "Аадар шиг ааштай ч шүүдэр шиг сэтгэлтэй,",
+  "Аашных нь дөлгөөн, сэтгэлийнх нь уужимд оршидог шүү",
+  ,
+  "Бүүдгэр өвлийн жавартай өдөр нэг удаа ч гэсэн инээмсэглэл нэмэхийг хүслээ ",
+];
+interface GiftBoxProps {
+  onOpen: () => void;
+  isOpening: boolean;
+}
+
+export default function GiftReveal({ onOpen, isOpening }: GiftBoxProps) {
+  const [visibleLines, setVisibleLines] = useState(0);
+  const [showHeart, setShowHeart] = useState(false);
 
   useEffect(() => {
-    // The iframe will auto-play the music
+    const timer = setInterval(() => {
+      setVisibleLines((prev) => {
+        if (prev >= poem.length) {
+          clearInterval(timer);
+          setTimeout(() => setShowHeart(true), 500);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 400);
+
+    return () => clearInterval(timer);
   }, []);
 
   return (
-    <div className="text-center space-y-10 max-w-2xl animate-reveal">
-      <Confetti />
-
-      <div className="fixed top-4 right-4 z-50">
-        <div className="bg-card/90 backdrop-blur-sm rounded-2xl p-3 border border-border/50 shadow-xl">
-          <div className="flex items-center gap-3 mb-2">
-            <Music className="w-4 h-4 text-primary animate-pulse" />
-            <span className="text-xs text-muted-foreground">Now Playing</span>
+    <div className="animate-reveal w-full max-w-2xl mx-auto px-4">
+      {/* Floating sparkles */}
+      <div className="fixed inset-0 pointer-events-none z-40">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div
+            key={i}
+            className="absolute animate-snow text-primary"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: "-20px",
+              animationDuration: `${Math.random() * 4 + 3}s`,
+              animationDelay: `${Math.random() * 3}s`,
+              opacity: 0.6,
+            }}
+          >
+            <Sparkles className="w-4 h-4" />
           </div>
-          <iframe
-            ref={iframeRef}
-            width="250"
-            height="50"
-            src="https://www.youtube.com/embed/8PTDv_szmL0?rel=0&autoplay=1&loop=1&playlist=8PTDv_szmL0"
-            title="Background Music"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="rounded-lg"
-          />
+        ))}
+      </div>
+
+      {/* Title */}
+      <div className="text-center mb-12">
+        <h2
+          className="text-5xl md:text-6xl text-primary mb-4 animate-glow-pulse"
+          style={{ fontFamily: "var(--font-script), cursive" }}
+        >
+          For You
+        </h2>
+        <div className="flex items-center justify-center gap-4">
+          <div className="h-px w-16 bg-gradient-to-r from-transparent to-primary/50" />
+          <Sparkles className="w-5 h-5 text-primary animate-twinkle" />
+          <div className="h-px w-16 bg-gradient-to-l from-transparent to-primary/50" />
         </div>
       </div>
 
-      <div className="flex justify-center gap-6">
-        <PartyPopper className="w-10 h-10 text-accent animate-bounce" />
-        <Heart
-          className="w-10 h-10 text-primary animate-pulse"
-          fill="currentColor"
-        />
-        <Sparkles
-          className="w-10 h-10 text-accent animate-bounce"
-          style={{ animationDelay: "0.1s" }}
-        />
-        <Heart
-          className="w-10 h-10 text-primary animate-pulse"
-          fill="currentColor"
-          style={{ animationDelay: "0.2s" }}
-        />
-        <PartyPopper
-          className="w-10 h-10 text-accent animate-bounce"
-          style={{ animationDelay: "0.3s" }}
-        />
-      </div>
+      {/* Poem Container */}
+      <div className="relative">
+        {/* Glow background */}
+        <div className="absolute inset-0 -m-8 bg-primary/5 rounded-3xl blur-2xl" />
 
-      <div className="bg-card/60 backdrop-blur-md rounded-[2rem] p-10 border border-primary/30 shadow-2xl animate-pulse-glow">
-        <div className="space-y-6">
-          <p className="text-muted-foreground tracking-[0.4em] uppercase text-sm">
-            Чиний нууц Санта бол ...helehguee
-          </p>
+        <div className="relative bg-card/50 backdrop-blur-sm border border-primary/20 rounded-2xl p-8 md:p-12 shadow-2xl shadow-primary/10">
+          {/* Decorative corners */}
+          <div className="absolute top-4 left-4 w-8 h-8 border-t-2 border-l-2 border-primary/40 rounded-tl-lg" />
+          <div className="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-primary/40 rounded-tr-lg" />
+          <div className="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-primary/40 rounded-bl-lg" />
+          <div className="absolute bottom-4 right-4 w-8 h-8 border-b-2 border-r-2 border-primary/40 rounded-br-lg" />
 
-          <h2 className="text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight text-primary py-4">
-            Nandia
-            <br />
-            <span className="text-accent text-4xl md:text-5xl">танаа</span>
-          </h2>
-
-          <div className="border border-primary/40 rounded-xl p-6 bg-card/30 backdrop-blur-sm">
-            <p className="text-sm md:text-base text-foreground/90 leading-relaxed flex flex-col gap-1">
-              <span>Өглөө бүрийн нар шиг туяатай байгаарай,</span>
-              <span>Өндөр зорилго бүртээ итгэлтэй алхaaрай.</span>
-              <span>
-                Алдаа бэрхшээл ирсэн ч дээгүүр гарах хүчтэй байгаарай,
-              </span>
-              <span>
-                Амжилт бүр чинь сэтгэлийн галыг тань бадраадаг байгаасай.
-              </span>
-              <span>Сэтгэлийн гал нь мөхөлгүй бадраасай,</span>
-              <span>Сэхээтэн бодол тань замыг нь гэрэлтүүлдэг байгаасай.</span>
-              <span>Өнөөдөр таны өдрийн нэг жижигхэн эрчим,</span>
-              <span>Өнөөх мөрөөдөлд тань хүргэх том хүч байх болтугай.</span>
-            </p>
-          </div>
-
-          <div className="flex justify-center gap-2">
-            {[...Array(5)].map((_, i) => (
-              <Heart
-                key={i}
-                className="w-6 h-6 text-primary/80 animate-pulse"
-                fill="currentColor"
-                style={{ animationDelay: `${i * 0.1}s` }}
-              />
+          {/* Poem lines */}
+          <div className="space-y-3 text-center">
+            {poem.map((line, index) => (
+              <p
+                key={index}
+                className={`text-lg md:text-xl font-light tracking-wide transition-all duration-700 ${
+                  index < visibleLines
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4"
+                } ${line === "" ? "h-4" : ""}`}
+                style={{
+                  color: line === "" ? "transparent" : "var(--foreground)",
+                  fontFamily: "var(--font-sans)",
+                  textShadow:
+                    index < visibleLines
+                      ? "0 0 20px rgba(255, 215, 0, 0.1)"
+                      : "none",
+                }}
+              >
+                {line || "\u00A0"}
+              </p>
             ))}
           </div>
+
+          {/* Heart animation at the end */}
+          {showHeart && (
+            <div className="flex justify-center mt-10 animate-float-up">
+              <div className="relative">
+                <Heart
+                  className="w-12 h-12 text-secondary fill-secondary animate-pulse"
+                  style={{
+                    filter: "drop-shadow(0 0 10px rgba(220, 38, 38, 0.5))",
+                  }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-primary animate-twinkle" />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
-
-      <div className="space-y-6 max-w-md mx-auto">
-        <div className="h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-        <p className="text-xl md:text-2xl text-foreground leading-relaxed font-light">
-          Бүүдгэр өвлийн баргар нэг өдөрт чинь
-          <span className="text-primary font-medium"> аз жаргалаар гэрэл </span>
-          нэмэхийг хүслээ
-        </p>
-        <p className="text-lg text-muted-foreground">
-          Энэ бэлэг нүүрэнд чинь инээмсэглэл тодруулах байх гэж найдъя
-        </p>
-        <div className="h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+      <div className="absolute bottom-1 right-1">
+        <Song />
       </div>
-
-      <div className="pt-6">
-        <div className="inline-flex items-center gap-3 bg-card/40 backdrop-blur-sm px-6 py-3 rounded-full border border-border/30">
-          <Sparkles className="w-4 h-4 text-accent" />
-          <p className="text-sm text-muted-foreground tracking-widest uppercase">
-            Аз жаргалтай өдрийн мэнд
-          </p>
-          <Sparkles className="w-4 h-4 text-accent" />
-        </div>
+      {/* Signature */}
+      <div className="text-center mt-10">
+        <p
+          className="text-2xl text-primary/80"
+          style={{ fontFamily: "var(--font-script), cursive" }}
+        >
+          Your Secret Santa
+        </p>
       </div>
     </div>
   );

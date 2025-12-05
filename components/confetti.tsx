@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 interface ConfettiPiece {
-  id: number
-  x: number
-  color: string
-  delay: number
-  duration: number
-  size: number
-  type: "square" | "heart" | "circle"
+  id: number;
+  x: number;
+  color: string;
+  delay: number;
+  duration: number;
+  size: number;
+  type: "square" | "heart" | "circle";
 }
 
 export function Confetti() {
-  const [pieces, setPieces] = useState<ConfettiPiece[]>([])
+  const [pieces, setPieces] = useState<ConfettiPiece[]>([]);
 
   useEffect(() => {
     const colors = [
@@ -22,11 +22,15 @@ export function Confetti() {
       "oklch(0.9 0.08 350)", // Light pink
       "oklch(0.7 0.15 15)", // Coral
       "oklch(0.95 0.02 350)", // Cream
-    ]
+    ];
 
-    const types: ("square" | "heart" | "circle")[] = ["square", "heart", "circle"]
+    const types: ("square" | "heart" | "circle")[] = [
+      "square",
+      "heart",
+      "circle",
+    ];
 
-    const newPieces: ConfettiPiece[] = []
+    const newPieces: ConfettiPiece[] = [];
     for (let i = 0; i < 80; i++) {
       newPieces.push({
         id: i,
@@ -36,10 +40,10 @@ export function Confetti() {
         duration: Math.random() * 3 + 2,
         size: Math.random() * 10 + 6,
         type: types[Math.floor(Math.random() * types.length)],
-      })
+      });
     }
-    setPieces(newPieces)
-  }, [])
+    setPieces(newPieces);
+  }, []);
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-50">
@@ -51,10 +55,18 @@ export function Confetti() {
             left: `${piece.x}%`,
             fontSize: piece.type === "heart" ? `${piece.size}px` : undefined,
             width: piece.type !== "heart" ? `${piece.size}px` : undefined,
-            height: piece.type !== "heart" ? `${piece.size * (piece.type === "square" ? 1.5 : 1)}px` : undefined,
+            height:
+              piece.type !== "heart"
+                ? `${piece.size * (piece.type === "square" ? 1.5 : 1)}px`
+                : undefined,
             backgroundColor: piece.type !== "heart" ? piece.color : undefined,
             color: piece.type === "heart" ? piece.color : undefined,
-            borderRadius: piece.type === "circle" ? "50%" : piece.type === "square" ? "2px" : undefined,
+            borderRadius:
+              piece.type === "circle"
+                ? "50%"
+                : piece.type === "square"
+                ? "2px"
+                : undefined,
             animation: `confetti-fall ${piece.duration}s ease-out forwards`,
             animationDelay: `${piece.delay}s`,
           }}
@@ -79,5 +91,5 @@ export function Confetti() {
         }
       `}</style>
     </div>
-  )
+  );
 }
